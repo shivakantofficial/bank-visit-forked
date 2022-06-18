@@ -1,9 +1,28 @@
 import React, { Component } from "react";
 import { useSelector } from "react-redux";
 import GoogleMapReact from "google-map-react";
+import get from "lodash/get";
+import userLocationMark from "../../assets/user-location.png";
+import hdfcBankMark from "../../assets/hdfc-bank-logo.png";
 
-const AnyReactComponent = ({ text }) => (
-  <div style={{ color: "red" }}>{text}</div>
+const UserMark = ({ text }) => (
+  <div style={{ color: "red" }}>
+    <img
+      src={userLocationMark}
+      style={{ width: "40px" }}
+      alt="user-location-marker"
+    />
+  </div>
+);
+
+const BankMarker = ({ text }) => (
+  <div style={{ color: "blue" }}>
+    <img
+      src={hdfcBankMark}
+      style={{ width: "35px" }}
+      alt="hdfc-location-mmarker"
+    />
+  </div>
 );
 
 /*
@@ -71,7 +90,7 @@ export const SimpleMap = () => {
     lat: 19.2226072,
     lng: 72.9817542,
   };
-  const zoom = 11;
+  const zoom = 14;
   const { latitude: lat, longitude: lng } = useSelector(
     (state) => state.location
   );
@@ -109,7 +128,17 @@ export const SimpleMap = () => {
         yesIWantToUseGoogleMapApiInternals={true}
         onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
-        <AnyReactComponent lat={lat} lng={lng} text="My Marker" />
+        <UserMark lat={lat} lng={lng} text="My Marker" />
+        {bankList.map((eachBank) => {
+          return (
+            <BankMarker
+              key={eachBank.place_id}
+              lat={get(eachBank, "geometry.location.lat", 0)}
+              lng={get(eachBank, "geometry.location.lng", 0)}
+              text="My Marker"
+            />
+          );
+        })}
       </GoogleMapReact>
       <button onClick={gotoCurrentLocation}>Go to current location</button>
     </div>
