@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { useSelector } from "react-redux";
 import GoogleMapReact from "google-map-react";
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const AnyReactComponent = ({ text }) => (
+  <div style={{ color: "red" }}>{text}</div>
+);
 
 /*
 export class SimpleMap extends Component {
@@ -73,6 +75,7 @@ export const SimpleMap = () => {
   const { latitude: lat, longitude: lng } = useSelector(
     (state) => state.location
   );
+  const { bankList = [] } = useSelector((state) => state);
 
   const handleApiLoaded = (map, maps) => {
     console.log({ map, maps });

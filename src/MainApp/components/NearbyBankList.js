@@ -1,48 +1,58 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import { setBanklist } from "../../Redux/features/banklistSlice";
 
 export const NearbyBankList = () => {
-  const { latitude: lat, longitude: lng } = useSelector(
-    (state) => state.location
-  );
-  const [bankList, setBankList] = useState([]);
-  useEffect(() => {
+  const dispatch = useDispatch();
+  const { latitude, longitude } = useSelector((state) => state.location);
+  const { bankList = [] } = useSelector((state) => state);
+
+  const getbanksNearby = () => {
     axios
       .get("https://maps.googleapis.com/maps/api/place/nearbysearch/json", {
         params: {
-          location: 19.0522115 + "," + 72.900522,
+          location: latitude + "," + longitude,
           radius: 1000,
           type: "bank",
           name: "hdfc",
           keyword: "bank",
           key: `${process.env.REACT_APP_GOOGLE_MAP_API_KEY}`,
         },
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
       })
       .then((res) => {
-        console.log(res, "success");
+        if (res.status == 200) {
+          const {
+            data: { results = [] },
+          } = res;
+          dispatch(setBanklist(results));
+        }
       })
       .catch((err) => {
         console.log(err, "Err");
       });
+  };
 
-    /*
-    fetch(
-      "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=19.0522115,72.900522&radius=1000&type=bank&name=hdfc&keyword=bank&key=AIzaSyC68H9SdF9KiJWStgwPugHIgY_IILwefRo"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data, "data");
-      })
-      .catch((err) => {
-        console.log(err, "Error");
-      });
-    */
-  }, []);
+  useEffect(() => {
+    getbanksNearby();
+  }, [latitude, longitude]);
 
-  return <ul>Bank List placeholder</ul>;
+  return (
+    <>
+      {Array.isArray(bankList) && bankList.length > 0 ? (
+        <ul className="banklist">
+          {bankList.map((eachBank) => {
+            return (
+              <li key={eachBank.place_id}>
+                <p>Hdfc Bank</p>
+                <div>{eachBank.vicinity}</div>
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p>Banks not found nearby</p>
+      )}
+    </>
+  );
 };

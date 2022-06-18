@@ -2,6 +2,7 @@
   "name": "bank-visit",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://maps.googleapis.com/maps/api/place/nearbysearch/json",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
