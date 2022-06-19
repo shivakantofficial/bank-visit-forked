@@ -100,22 +100,6 @@ export const SimpleMap = () => {
     console.log({ map, maps });
   };
 
-  const showPosition = (arg) => {
-    console.log(arg, "success");
-  };
-
-  const posError = (err) => {
-    console.log(err, "Error");
-  };
-
-  const gotoCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition, posError);
-    } else {
-      alert("Sorry, geolocation is not supported by this browser");
-    }
-  };
-
   return (
     <div style={{ height: "300px", width: "500px" }}>
       <GoogleMapReact
@@ -140,7 +124,6 @@ export const SimpleMap = () => {
           );
         })}
       </GoogleMapReact>
-      <button onClick={gotoCurrentLocation}>Go to current location</button>
     </div>
   );
 };
