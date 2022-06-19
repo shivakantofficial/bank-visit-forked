@@ -58,6 +58,7 @@ export const NearbyBankList = () => {
                 <div>
                   <Switch
                     defaultChecked={false}
+                    checked={eachBank.visitStatus}
                     onClick={(value, event) =>
                       handleSwitchClick(eachBank.place_id, value, event)
                     }
