@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Switch from "rc-switch";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { setBanklist } from "../../Redux/features/banklistSlice";
+import {
+  setBanklist,
+  updateVisitStatus,
+} from "../../Redux/features/banklistSlice";
+import "rc-switch/assets/index.css";
 
 export const NearbyBankList = () => {
   const dispatch = useDispatch();
@@ -37,6 +42,10 @@ export const NearbyBankList = () => {
     getbanksNearby();
   }, [latitude, longitude]);
 
+  const handleSwitchClick = (placeId, value, event) => {
+    dispatch(updateVisitStatus({ placeId, value }));
+  };
+
   return (
     <>
       {Array.isArray(bankList) && bankList.length > 0 ? (
@@ -46,6 +55,14 @@ export const NearbyBankList = () => {
               <li key={eachBank.place_id}>
                 <p>Hdfc Bank</p>
                 <div>{eachBank.vicinity}</div>
+                <div>
+                  <Switch
+                    defaultChecked={false}
+                    onClick={(value, event) =>
+                      handleSwitchClick(eachBank.place_id, value, event)
+                    }
+                  />
+                </div>
               </li>
             );
           })}
