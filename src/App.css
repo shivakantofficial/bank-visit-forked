@@ -87,6 +87,7 @@
   flex-grow: 1;
 }
 
-/* .each-bank .cta {
-  
-} */
+.each-bank .cta {
+  padding: 5px;
+  cursor: pointer;
+}

@@ -59,7 +59,7 @@ export const NearbyBankList = () => {
                     <p>Hdfc Bank</p>
                     <div>{eachBank.vicinity}</div>
                   </div>
-                  <div>
+                  <div className="cta">
                     <Switch
                       defaultChecked={false}
                       checked={eachBank.visitStatus}
