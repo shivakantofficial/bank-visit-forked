@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import get from "lodash/get";
 import { updateLocation } from "../../Redux/features/locationSlice";
+import { updateLoadingStatus } from "../../Redux/features/loaderSlice";
 
 export const SearchByAddress = () => {
   const dispatch = useDispatch();
@@ -26,10 +27,16 @@ export const SearchByAddress = () => {
         if (latitude && longitude) {
           dispatch(updateLocation({ latitude, longitude }));
         }
+        dispatch(updateLoadingStatus(false));
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(updateLoadingStatus(false));
       });
   };
 
   const handleSearch = () => {
+    dispatch(updateLoadingStatus(true));
     getCoordinates(location);
   };
 

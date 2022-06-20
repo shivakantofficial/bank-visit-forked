@@ -1,10 +1,12 @@
 import React from "react";
-import loader from "../../assets/loader.gif";
+import { useSelector } from "react-redux";
+import loaderSrc from "../../assets/loader.gif";
 
 export const Loader = () => {
+  const { loader } = useSelector((state) => state);
   return (
     <div className="loader-conatiner">
-      <img src={loader} alt="loader" />
+      {loader && <img src={loaderSrc} alt="loader" />}
     </div>
   );
 };
