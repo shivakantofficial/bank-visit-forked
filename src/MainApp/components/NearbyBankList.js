@@ -18,7 +18,7 @@ export const NearbyBankList = () => {
       .get("https://maps.googleapis.com/maps/api/place/nearbysearch/json", {
         params: {
           location: latitude + "," + longitude,
-          radius: 1000,
+          radius: 3000,
           type: "bank",
           name: "hdfc",
           keyword: "bank",
@@ -48,7 +48,7 @@ export const NearbyBankList = () => {
 
   return (
     <div className="nearbybank-conatiner">
-      <h3>Nearby HDFC bank within 1Km</h3>
+      <h3>Nearby HDFC bank within 3Km</h3>
       <div>
         {Array.isArray(bankList) && bankList.length > 0 ? (
           <ul className="banklist">
