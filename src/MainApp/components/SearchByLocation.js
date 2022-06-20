@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import get from "lodash/get";
 import { updateLocation } from "../../Redux/features/locationSlice";
+import myLocation from "../../assets/my-location.png";
 
 export const SearchByLocation = () => {
   const dispatch = useDispatch();
@@ -33,5 +34,9 @@ export const SearchByLocation = () => {
     }
   };
 
-  return <button onClick={gotoCurrentLocation}>current location</button>;
+  return (
+    <div className="my-location-pointer" onClick={gotoCurrentLocation}>
+      <img src={myLocation} alt={"my-location"} />
+    </div>
+  );
 };

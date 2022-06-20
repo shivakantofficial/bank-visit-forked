@@ -47,30 +47,35 @@ export const NearbyBankList = () => {
   };
 
   return (
-    <>
-      {Array.isArray(bankList) && bankList.length > 0 ? (
-        <ul className="banklist">
-          {bankList.map((eachBank) => {
-            return (
-              <li key={eachBank.place_id}>
-                <p>Hdfc Bank</p>
-                <div>{eachBank.vicinity}</div>
-                <div>
-                  <Switch
-                    defaultChecked={false}
-                    checked={eachBank.visitStatus}
-                    onClick={(value, event) =>
-                      handleSwitchClick(eachBank.place_id, value, event)
-                    }
-                  />
-                </div>
-              </li>
-            );
-          })}
-        </ul>
-      ) : (
-        <p>Banks not found nearby</p>
-      )}
-    </>
+    <div className="nearbybank-conatiner">
+      <h3>Nearby HDFC bank within 1Km</h3>
+      <div>
+        {Array.isArray(bankList) && bankList.length > 0 ? (
+          <ul className="banklist">
+            {bankList.map((eachBank) => {
+              return (
+                <li key={eachBank.place_id} className="each-bank">
+                  <div className="address">
+                    <p>Hdfc Bank</p>
+                    <div>{eachBank.vicinity}</div>
+                  </div>
+                  <div>
+                    <Switch
+                      defaultChecked={false}
+                      checked={eachBank.visitStatus}
+                      onClick={(value, event) =>
+                        handleSwitchClick(eachBank.place_id, value, event)
+                      }
+                    />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p>Banks not found nearby</p>
+        )}
+      </div>
+    </div>
   );
 };

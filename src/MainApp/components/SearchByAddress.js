@@ -34,7 +34,7 @@ export const SearchByAddress = () => {
   };
 
   return (
-    <div>
+    <div className="location-search-conatiner">
       <input value={location} onChange={(e) => handleChange(e)} />
       <button onClick={handleSearch}>Search</button>
     </div>
