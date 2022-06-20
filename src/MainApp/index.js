@@ -29,7 +29,7 @@ export const Main = () => {
   return (
     <div className="main">
       <Tabs defaultActiveKey="1">
-        <TabPane tab="TAB 1" key="1">
+        <TabPane tab="Bank List" key="1">
           <div className="location-search-container">
             <SearchByLocation />
             <SearchByAddress />
@@ -38,7 +38,7 @@ export const Main = () => {
           <SimpleMap />
           <NearbyBankList />
         </TabPane>
-        <TabPane tab="TAB 2" key="2">
+        <TabPane tab="Visiting Bank" key="2">
           <VisitingBranchList />
         </TabPane>
       </Tabs>

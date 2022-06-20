@@ -12,7 +12,6 @@ export const VisitingBranchList = () => {
     );
     return (
       <div>
-        <h2>Branch Visiting</h2>
         <ul className="banklist">
           {Array.isArray(bankToVisit) && bankToVisit.length > 0 ? (
             bankToVisit.map((eachBank) => (
